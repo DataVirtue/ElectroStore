@@ -1,0 +1,53 @@
+<%- layout('partials/boilerplate.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/registerForm.css">
+
+    <div class="row vh-100 justify-content-center align-items-center">
+        <div class="col-lg-4">
+            <h1 class="text-center mb-3">Register!</h1>
+            <div class="card shadow mb-3">
+                <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                    alt="" class="img-fluid card-img-top mb-3">
+                <div class="card-body">
+                    <form action="/users/register" method="POST">
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                        <div class="form-group mt-5">
+                            <h2 class="sub-label">Address:</h2>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="address-street" class="form-label">Street</label>
+                            <input type="text" class="form-control" name="address[street]" id="address-street">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="address-city" class="form-label">City</label>
+                            <input type="text" class="form-control" name="address[city]" id="address-city">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="address-state" class="form-label">State</label>
+                            <input type="text" class="form-control" name="address[state]" id="address-state">
+                        </div>
+
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary"> Register</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>

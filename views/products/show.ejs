@@ -1,0 +1,127 @@
+<%- layout('partials/boilerplate.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/showpage.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/starability.css">
+
+
+    <div class="row mt-5">
+        <div class="col-md-4 offset-md-2">
+            <div class="card card-main">
+                <img class="card-img-top" src="<%= foundProduct.image[0] %> " alt="">
+                <div class="card-body">
+                    <h1 class="card-title">
+                        <%= foundProduct.name%>
+                    </h1>
+                    <h2 class="card-subtitle mb-2">
+                        $<%= foundProduct.price%>
+                    </h2>
+                    <p class="card-text">
+                        <%= foundProduct.description%>
+                    </p>
+                    <% if( user && user.isAdmin ){ %>
+                        <div class="">
+                            <a class="btn btn-info edit" href="/products/<%=foundProduct._id%>/edit">Edit</a>
+                            <form class="d-inline delete d-none" action="/products/<%=foundProduct._id%>?_method=DELETE"
+                                method="POST" id="delete-form"></form>
+                            <button form="delete-form" class=" btn btn-danger delete">Delete</button>
+                        </div> 
+                        <% } %>
+                            <%if(user && !user.isAdmin || !user){%>
+                                <div class="">
+
+                                    <form class="d-inline  d-none" action="/products/<%=foundProduct._id%>/buy"
+                                        method="POST" id="buy-form"></form>
+                                    <button form="buy-form" class=" btn btn-warning buy">Buy Now</button>
+
+                                    <form class="d-inline  d-none" action="/products/<%=foundProduct._id%>/add-to-cart"
+                                        method="POST" id="add-to-cart-form"></form>
+                                    <button form="add-to-cart-form" class=" btn btn-info add-to-cart">Add To
+                                        Cart</button>
+                                </div> 
+                                <% } %>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 ms-3 mt-5">
+            <% if(user) { %>
+                <div class="text-center">
+                    <h2>Leave a review</h2>
+                    <form action="/products/<%=foundProduct.id%>/reviews" method="POST">
+                        <div class="row">
+
+                            <fieldset class="starability-basic col-md-6 offset-md-3 offset-xl-4" required>
+                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0"
+                                    checked aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+
+
+                        </div>
+
+                        <div class=" form-group">
+                            <label class="form-label" for="body" aria-hidden="false" hidden>Review</label>
+                            <textarea class="form-control" name="review[body]" id="body" cols="30" rows="5"
+                                required></textarea>
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+                <%} %>
+                    <div class="mt-2">
+                        <% for(let review of foundProduct.reviews) {%>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <p class="starability-result" data-rating="<%=review.rating %>">
+                                        Rated: <%=review.rating %>
+                                    </p>
+                                    <h5 class="card-title">
+                                        <%= review.author.username %>
+                                    </h5>
+
+                                    <p class="card-text">
+                                        <%= review.body %>
+                                    </p>
+
+                                </div>
+
+                                <% if(user && user._id.equals(review.author._id)) { %>
+
+                                    <div class="m-3">
+                                        <form
+                                            action="/products/<%=foundProduct._id%>/reviews/<%=review._id %>?_method=DELETE"
+                                            method="POST">
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                Delete
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+                                    <% } %>
+                            </div>
+                            <% } %>
+
+                    </div>
+
+        </div>
+
+
+    </div>
+
+    </div>
+    </div>
+
+    </html>

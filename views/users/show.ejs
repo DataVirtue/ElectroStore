@@ -1,0 +1,122 @@
+<%- layout('partials/boilerplate.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/userShowPage.css">
+
+
+    <div class="row border-bottom pb-2">
+        <div class="col-md-4 mt-5 ">
+            <div class="card border-0" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        <%= foundUser.username %>
+                    </h5>
+                    <h6 class="card-subtitle mb-3 text-muted text-center">
+                        <%= foundUser.email %>
+                    </h6>
+                    <h6 class="ms-1 text-center">
+                        Address
+                    </h6>
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item border-0">Street: <%= foundUser.address? foundUser.address.street
+                                : '67 Talbot St' %>
+                        </li>
+                        <li class="list-group-item border-0 text-center">City: <%= foundUser.address?
+                                foundUser.address.city : 'Nottingham' %>
+                        </li>
+                        <li class="list-group-item border-0 text-center">State: <%= foundUser.address?
+                                foundUser.address.state : 'Nottinghamshire' %>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4 mt-3">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                class="img-thumbnail rounded-circle border-0" alt="...">
+        </div>
+
+        <div class="col-md-4 mt-5">
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item border-0">Orders: <%= foundUser.orders.length%>
+                </li>
+                <li class="list-group-item border-0 text-center">Payment Method: Card
+                </li>
+                <li class="list-group-item border-0 text-center">Date Joined: <%= foundUser.joinDate? foundUser.joinDate
+                        : '11-11-2020' %>
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+
+    <div class="row mt-4">
+        <ul>
+            <% for(order of foundUser.orders.reverse()){ %>
+                <li class="list-item style-none">
+                    <div class="card mb-3">
+                        <div class="row">
+                            <div class="card-body ">
+                                <div class="card-title text-center">
+                                    <h5>Order No. : <%= order._id %>
+                                    </h5>
+                                </div>
+                                <div class="card-subtitle text-center">
+                                    <h6>
+                                        Order Placed: <%=order.date.toString().slice(0,24) %>
+                                    </h6>
+                                </div>
+                                <div class="card-subtitle text-center">
+                                    <h6>
+                                        Order Total: $<%=order.product.reduce((initialvalue,product)=>
+                                            initialvalue+product.price,0)%>
+                                    </h6>
+                                    <h6>
+                                        Payment Status: <%= order.paymentStatus? order.paymentStatus: 'unk' %>
+                                    </h6>
+                                    <% if(order.paymentStatus==='Unpaid' ) {%>
+                                        <form action="/payments/retry/<%= order._id%>" method="POST">
+                                            <button class="btn btn-outline-danger">
+                                                Retry Payment
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </div>
+                                <div class="card-text">
+                                    <ul>
+                                        <h5>Products:</h5>
+                                        <% for(product of order.product){ %>
+                                            <li class="list-item style-none">
+                                                <div class="card">
+                                                    <div class="row">
+                                                        <img class="card-img-top product-img col-md-4"
+                                                            src="<%= product.image[0] %>" alt="">
+                                                        <div class="card-body col-md-8">
+                                                            <h6 class="card-title">
+                                                                <a href="/products/<%= product._id%>">
+                                                                    <%=product.name %>
+                                                                </a>
+                                                            </h6>
+                                                            <p class="card-text">
+                                                                <%=product.description.slice(0,product.description.indexOf('Categories'))%>
+                                                                    <br>
+                                                                    Categories: <br>
+                                                                    <%= product.description.slice(product.description.indexOf('Categories')+11,)
+                                                                        %>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <% } %>
+        </ul>
+
+    </div>

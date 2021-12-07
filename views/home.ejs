@@ -1,0 +1,33 @@
+<%- layout('partials/boilerplate.ejs') %>
+
+    <link rel="stylesheet" href="stylesheets/home.css">
+
+
+
+    <div class=" container d-flex justify-content-center align-items-center vh-100 ">
+        <div class="col-md-10 col-sm-10 col-offset-0 main-col">
+            <h1 class="text-center brand-home">ElectroStore</h1>
+
+
+
+
+
+            <form class="d-flex form-search " method="GET" action="/search">
+                <input class=" form-control me-2 search" type="search" placeholder="Search" aria-label="Search"
+                    name="name" value="" autocomplete="off">
+                <button class="btn btn-outline-success search-btn" type="submit">Search</button>
+            </form>
+
+            <div class="card search-card d-none">
+                <ul class="list-group list-group-flush search-list">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="javascripts/home.js"></script>

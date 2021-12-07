@@ -1,0 +1,19 @@
+#nav-col{
+    background-color: #023047;
+}
+
+.navbar-brand{
+    font-family: 'Sacramento', cursive;
+    font-size: 2rem;
+}
+.nav-link{
+    font-size: 1rem;
+}
+.bi-cart{
+width: 1.5rem;
+height: 1.5rem;
+}
+
+.cart{
+    padding-top: 0.4rem;
+}

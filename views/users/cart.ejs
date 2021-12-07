@@ -1,0 +1,119 @@
+<%- layout('partials/boilerplate.ejs') %>
+
+    <% if(cartContent && cartContent.length) {%>
+        <div class="row  ">
+            <div class=" col-lg-8 mt-lg-5 order-2 order-lg-1">
+                <h1 class=" text-center mb-5 ">Your Shopping Cart</h1>
+                <% for(product of cartContent){ %>
+                    <div class="card mt-3">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <img class="card-img-top" src="<%= product.image[0]%>" alt="">
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-3">
+                                        <a class="text-reset text-decoration-none" href="/products/<%= product._id%>">
+                                            <%= product.name %>
+                                        </a>
+                                    </h4>
+                                    <h5 class="card-subtitle mb-3">
+                                        $<%= product.price %>
+                                    </h5>
+                                    <p class="card-text">
+                                        <%=product.description.slice(0,product.description.indexOf('Categories'))%>
+                                            <br>
+
+                                    </p>
+                                    <div>
+
+                                        <form class="d-inline " action="/products/<%= product._id%>/remove-from-cart"
+                                            method="POST">
+                                            <button class="btn btn-outline-danger" type="submit">Remove</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <% } %>
+
+            </div>
+            <div class="col-lg-4 mt-lg-5 order-1 order-lg-2">
+
+                <div class="row">
+                    <h2 class="text-center col-xl-10 mt-5 mb-3">
+                        Summary
+                    </h2>
+                    <div class="col-xl-10 ">
+                        <div class="card">
+                            <ul class="list-group list-group-flush ">
+                                <li class="list-group-item">Number of Products: <%= cartContent.length %>
+                                </li>
+                                <li class="list-group-item">Total Price: $<%= cartContent.reduce((sum,currentProduct)=>
+                                        sum +
+                                        currentProduct.price,0) %> </li>
+                                <li class="list-group-item ">
+                                    <p>
+                                        Delivery:
+                                        <% if(user && user.address){ %>
+
+                                            <%= user.address.street%>,
+                                                <%= user.address.city %>,
+                                                    <%= user.address.state %>,
+                                    </p>
+                                    <% } else { %>
+                                        <%= "Unknwon" %>
+                                            <% } %>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                        <form action="/users/checkout" method="POST">
+                            <div class="d-grid gap-2 mt-2 mb-5">
+
+                                <button class="btn btn-warning" type="submit">CheckOut</button>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <% } else{ %>
+            <div class="row align-items-center ">
+                <div class=" row">
+                    <div class="card border-0">
+                        <div class="col-lg-6 offset-lg-3 ">
+                            <img class="card-img-top"
+                                src="https://cdn.pixabay.com/photo/2017/08/09/10/00/shopping-cart-2614015_960_720.png"
+                                alt="">
+                        </div>
+                        <div class="col-lg-6 offset-lg-3 text-center ">
+                            <div class="card-body ">
+                                <h3 class="card-title mb-5">
+                                    Your Shopping Cart is Empty
+                                </h3>
+
+                                <a href="/products" class="btn btn-warning "> View All Products
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <% } %>

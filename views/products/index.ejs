@@ -1,0 +1,40 @@
+<%- layout('partials/boilerplate.ejs') %>
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  <script src="/javascripts/indexPage.js"></script>
+  <section class="mt-5">
+    <ul class="row list-unstyled">
+      <% for(product of allProducts){ %>
+        <li class="index-card col-lg-4 col-xl-3">
+          <div class="card mb-3 border-0">
+            <img
+              src="<%=product.image[0] || 'https://i5.walmartimages.com/asr/5dfef872-162b-4ebd-bbc8-b143ddd673be_1.fedc28886a8717c65a22e051b1cd695a.jpeg%25253FodnHeight%25253D450%252526odnWidth%25253D450%252526odnBg%25253DFFFFFF'%>"
+              class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title product-name"> <a href="/products/<%= product._id%>">
+                  <%= product.name%>
+                </a></h5>
+              <p class="card-text">
+                <%=product.description.slice(0,product.description.indexOf('Categories'))%>
+              </p>
+            </div>
+            <ul class="list-group list-group-flush border-0">
+              <li class="list-group-item border-0">$<%=product.price%>
+              </li>
+            </ul>
+            <div class="card-body border-0 d-grid gap-2">
+              <a href="/products/<%= product._id%>" class="card-link btn btn-info link-btn">View <%=
+                  product.name.slice(0,15) %>
+              </a>
+              <!-- <a href="#" class="card-link btn btn-success link-btn">Buy</a> -->
+            </div>
+          </div>
+        </li>
+        <% } %>
+
+    </ul>
+
+    </div>
+  </Section>
+
+
+  </html>

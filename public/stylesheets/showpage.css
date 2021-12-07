@@ -1,0 +1,58 @@
+.card-img-top{
+    height: 20rem;
+    width: auto;
+    object-fit:contain;
+
+}
+
+.card-title{
+    font-size:1rem;
+}
+
+.card-subtitle{
+    font-size: 1.25rem;
+}
+
+.card-text{
+    font-size:0.9rem;
+}
+
+.card-main{
+    border:none;
+    max-width: 20rem;
+}
+
+.delete{
+ width: 45%;
+ background-color: #fb8500;
+ border-color: #fb8500;
+ color: white;
+ 
+}
+
+.edit{
+    width: 45%;
+    background-color: #219ebc;
+    border-color: #219ebc;
+    color: white;
+}
+
+.buy{
+    width: 45%;
+    background-color: #fb8500;
+    border-color: #fb8500;
+    color: white;
+   
+}
+
+.add-to-cart{
+    width: 45%;
+
+    background-color: #ffb703;
+    border-color: #ffb703;
+    color: white;
+}
+
+body{
+    background-color: #fffffc;
+}

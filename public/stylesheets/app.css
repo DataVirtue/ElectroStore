@@ -1,0 +1,35 @@
+.index-card{
+    height: 100%;
+
+}
+
+.card-img-top{
+height: 18rem;
+width: 100%;
+object-fit: cover;
+/* object-position: 100% 0; */
+
+}
+/* 
+.link-btn{
+    width: 3rem;
+} */
+
+@media(max-width:992px){
+    .card-img-top{
+        height: 100%;
+        width: 100%;
+        /* object-position: 100% 0; */
+        
+        }
+}
+.btn-info{
+    background-color: #ffb703;
+    color: #023047;
+    border-color:#ffb703 ;
+    
+}
+
+body{
+    background-color: #fffffc;
+}

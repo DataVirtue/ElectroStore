@@ -1,0 +1,17 @@
+.img-thumbnail{
+    width: 20rem;
+    height: 20rem;
+    object-fit:cover;
+    
+
+}
+
+.product-img{
+    width: 10rem;
+    height: 10rem;
+    object-fit:contain;
+
+}
+.style-none{
+    list-style: none;
+}
