@@ -6,7 +6,7 @@ const Review = require('../models/review')
 
 
 // requiring stripe
-const { stripe } = require('../stripeConfig')
+const { stripe, successUrl, cancelUrl } = require('../stripeConfig')
 const { createStripeArray } = require('../helperFunctions')
 
 
@@ -128,8 +128,8 @@ module.exports.buyNow = async (req, res) => {
 
 
         const stripeSession = await stripe.checkout.sessions.create({
-            success_url: 'http://localhost:3000/payments/success',
-            cancel_url: 'http://localhost:3000/payments/cancel',
+            success_url: successUrl,
+            cancel_url: cancelUrl,
             line_items: createStripeArray(cartContent),
             mode: 'payment',
             metadata: {

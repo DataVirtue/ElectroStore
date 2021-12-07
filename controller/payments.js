@@ -10,7 +10,7 @@ const Order = require('../models/order')
 
 
 // requiring stripe and stripe utils 
-const { stripe, endpointSecret } = require('../stripeConfig')
+const { stripe, endpointSecret, successUrl, cancelUrl } = require('../stripeConfig')
 const { fulfillOrder } = require('../helperFunctions')
 const { createStripeArray } = require('../helperFunctions')
 
@@ -100,8 +100,8 @@ module.exports.retry = async (req, res) => {
         console.log(retryOrder.product)
 
         const stripeSession = await stripe.checkout.sessions.create({
-            success_url: 'http://localhost:3000/payments/success',
-            cancel_url: 'http://localhost:3000/payments/cancel',
+            success_url: successUrl,
+            cancel_url: cancelUrl,
             line_items: createStripeArray(retryOrder.product),
             mode: 'payment',
             metadata: {
